@@ -58,3 +58,8 @@ def check_answer(message):
             bot.send_message(message.chat.id, 'Увы, Вы не угадали. Попробуйте ещё раз!', reply_markup=keyboard_hider)
         # Удаляем юзера из хранилища (игра закончена)
         utils.finish_user_game(message.chat.id)
+
+if __name__ == '__main__':
+    utils.count_rows()
+    random.seed()
+    bot.polling(none_stop=True)
