@@ -1,9 +1,12 @@
 import os
+import random
 
 import time
 
 import musicbot.config as config
 import telebot
+import musicbot.db.SQLighter as SQLighter
+import musicbot.db.utils as utils
 
 bot = telebot.TeleBot(config.token)
 
@@ -20,3 +23,18 @@ def find_file_ids(message):
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
+
+@bot.message_handler(commands=['game'])
+def game(message):
+    # Подключаемся к БД
+    db_worker = SQLighter(config.database_name)
+    # Получаем случайную строку из БД
+    row = db_worker.select_single(random.randint(1, utils.get_rows_count()))
+    # Формируем разметку
+    markup = utils.generate_markup(row[2], row[3])
+    # Отправляем аудиофайл с вариантами ответа
+    bot.send_voice(message.chat.id, row[1], reply_markup=markup)
+    # Включаем "игровой режим"
+    utils.set_user_game(message.chat.id, row[2])
+    # Отсоединяемся от БД
+    db_worker.close()
