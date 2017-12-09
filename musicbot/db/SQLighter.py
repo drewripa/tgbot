@@ -1,9 +1,12 @@
 import sqlite3
+import os.path
 
 class SQLighter:
 
     def __init__(self, database):
-        self.connection = sqlite3.connect(database)
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        db_path = os.path.join(BASE_DIR, "db/music.db")
+        self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
 
     def select_all(self):
