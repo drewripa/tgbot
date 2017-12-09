@@ -5,7 +5,7 @@ import time
 
 import config
 import telebot
-import db.SQLighter as SQLighter
+from db.SQLighter import SQLighter
 import db.utils as utils
 from telebot import types
 
