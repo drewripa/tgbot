@@ -5,7 +5,9 @@ class SQLighter:
 
     def __init__(self, database):
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        print(BASE_DIR)
         db_path = os.path.join(BASE_DIR, "db/music.db")
+        print(db_path)
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
 
