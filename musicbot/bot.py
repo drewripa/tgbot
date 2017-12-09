@@ -3,10 +3,10 @@ import random
 
 import time
 
-import musicbot.config as config
+import config
 import telebot
-import musicbot.db.SQLighter as SQLighter
-import musicbot.db.utils as utils
+import db.SQLighter as SQLighter
+import db.utils as utils
 
 bot = telebot.TeleBot(config.token)
 

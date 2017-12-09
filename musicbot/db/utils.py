@@ -3,8 +3,8 @@ from random import shuffle
 
 from telebot import types
 
-from musicbot.db.SQLighter import SQLighter
-from musicbot.config import shelve_name, database_name
+import db.SQLighter as SQLighter
+from config import shelve_name, database_name
 
 def count_rows():
     """
