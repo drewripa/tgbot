@@ -1,6 +1,7 @@
 import telebot
 import cherrypy
 import config
+from telebot import types
 
 WEBHOOK_HOST = 'ec2-34-242-96-172.eu-west-1.compute.amazonaws.com'
 WEBHOOK_PORT = 443  # 443, 80, 88 или 8443 (порт должен быть открыт!)
@@ -32,8 +33,15 @@ class WebhookServer(object):
 
 # Хэндлер на все текстовые сообщения
 @bot.message_handler(func=lambda message: True, content_types=['text'])
-def echo_message(message):
-    bot.reply_to(message, message.text)
+def default_test(message):
+    keyboard = types.InlineKeyboardMarkup()
+    url_button = types.InlineKeyboardButton(text="Перейти в Google", url="https://google.com")
+    keyboard.add(url_button)
+    bot.send_message(message.chat.id, "Привет! Нажми на кнопку и перейди в поисковик.", reply_markup=keyboard)
+
+
+
+
 
 # Снимаем вебхук перед повторной установкой (избавляет от некоторых проблем)
 bot.remove_webhook()
