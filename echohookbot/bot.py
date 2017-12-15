@@ -69,8 +69,6 @@ def callback_inline(call):
         if call.data == "test":
             bot.edit_message_text(inline_message_id=call.inline_message_id, text="Бдыщь")
 
-if __name__ == '__main__':
-    bot.polling(none_stop=True)
 
 
 
@@ -94,3 +92,7 @@ cherrypy.config.update({
 
  # Собственно, запуск!
 cherrypy.quickstart(WebhookServer(), WEBHOOK_URL_PATH, {'/': {}})
+
+
+if __name__ == '__main__':
+    bot.polling(none_stop=True)
